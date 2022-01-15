@@ -5,8 +5,11 @@ import { NasaCard } from "../components/NasaCard";
 export function NasaApp() {
 	const [imageArray, setImageArray] = useState(null);
 
+	var currentURL = window.location.href;
+	var queryParam = currentURL.split("=").length == 1 ? "star" : currentURL.split("=")[1]
+
 	useEffect(() => {
-		getApodPics(successCallback, failCallback)
+		getApodPics(queryParam, successCallback, failCallback)
 	}, []);
 
 	const renderCards = () => {

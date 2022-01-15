@@ -1,7 +1,7 @@
 import { nasaURLlibrary } from "../utils/constants";
 
-export async function getApodPics(successCallback, failCallback) {
-	await fetch(nasaURLlibrary, {
+export async function getApodPics(searchQuery, successCallback, failCallback) {
+	await fetch(nasaURLlibrary + searchQuery, {
 		method: 'GET',
 	})
 	.then(res => {
