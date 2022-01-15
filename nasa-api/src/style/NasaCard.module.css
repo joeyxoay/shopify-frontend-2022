@@ -1,0 +1,4 @@
+.cardBack p {
+    overflow-y: auto;
+    max-height: 50%;
+}

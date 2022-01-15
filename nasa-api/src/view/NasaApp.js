@@ -18,14 +18,16 @@ export function NasaApp() {
 			imageArray.map((image) => {
 				if(image.links[0].href[31] === "i"){
 					return(
-						<NasaCard
-							key = {image.data[0].nasa_id}
-							date = {image.data[0].date_created}
-							explanation = {image.data[0].description}
-							title = {image.data[0].title}
-							url = {image.links[0].href}
-							favorite = {image.favorite}
-						/>
+						<Grid item xs={12} md={6} lg={4}>
+							<NasaCard
+								key = {image.data[0].nasa_id}
+								date = {image.data[0].date_created}
+								explanation = {image.data[0].description}
+								title = {image.data[0].title}
+								url = {image.links[0].href}
+								favorite = {image.favorite}
+							/>
+						</Grid>
 					)
 				}
 				return null;
@@ -55,9 +57,9 @@ export function NasaApp() {
 						justify="space-around"
 						alignItems="center"
 					>
-						<Grid>
+						{/* <Grid item xs={12} md={6} lg={6}> */}
 							{renderCards()}
-						</Grid>
+						{/* </Grid> */}
 					</Grid>
 				};
             </div>
