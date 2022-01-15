@@ -1,12 +1,8 @@
-import { apiKey, imageCount, nasaURL } from "../utils/constants";
+import { nasaURLlibrary } from "../utils/constants";
 
 export async function getApodPics(successCallback, failCallback) {
-	await fetch(nasaURL + "?count=" + imageCount + "&api_key=" + apiKey, {
+	await fetch(nasaURLlibrary, {
 		method: 'GET',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-		}
 	})
 	.then(res => {
         if(res.status !== 200){
@@ -14,7 +10,7 @@ export async function getApodPics(successCallback, failCallback) {
         }else{
             res.json()
             .then(jsonRes => {
-                successCallback(jsonRes);
+                successCallback(jsonRes.collection.items);
             })
         }
 	})

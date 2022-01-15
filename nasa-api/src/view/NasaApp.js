@@ -12,14 +12,15 @@ export function NasaApp() {
 	const renderCards = () => {
 		return (
 			imageArray.map((image) => {
-				if(image.media_type === "image"){
+				if(image.links[0].href[31] === "i"){
 					return(
 						<NasaCard
-							key = {image.url}
-							date = {image.date}
-							explanation = {image.explanation}
-							title = {image.title}
-							url = {image.url}
+							key = {image.data[0].nasa_id}
+							date = {image.data[0].date_created}
+							explanation = {image.data[0].description}
+							title = {image.data[0].title}
+							url = {image.links[0].href}
+							favorite = {image.favorite}
 						/>
 					)
 				}
@@ -29,6 +30,10 @@ export function NasaApp() {
     }
 
 	const successCallback = (body) => {
+		body.map((image) => {
+			image.favorite = false;
+			return null;
+		});
 		setImageArray(body);
     }
 
