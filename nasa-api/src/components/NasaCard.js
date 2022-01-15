@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CardContent, CardMedia, Typography } from "@material-ui/core";
-import { IconButton } from "@mui/material";
+import { Grid, IconButton, Paper } from "@mui/material";
 import Card from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -35,82 +35,73 @@ export function NasaCard(props) {
 
   return (
     <>
-    <ReactCardFlip isFlipped={flip} containerStyle={{width: "90%", height: 350}}>
-      <div>
-        <CardMedia
-          component="img"
-          height="300"
-          image={props.url}
-          alt={props.title}
-        />
-        <button onClick={() => flipMechanism()}>flip</button>
-      </div>
-
-      <div className={styles.cardBack} style={{height: 350}}>
-        <Typography variant="h5" color="text.secondary">
-          {props.title}
-        </Typography>
-        <Typography variant="h5" color="text.secondary">
-          {date}
-        </Typography>
-        <p>{props.explanation}</p>
-          
-        <IconButton aria-label="like" onClick={() => likeMechanism()}>
-          {like ? 
-            <FavoriteIcon
+    <div style={{textAlign: "center", margin: 20}}>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-around"
+        alignItems="center"
+      >
+        <Grid style={{width: "80%"}}>
+          <Typography className={styles.title} style={{fontWeight: "bolder"}}>
+            {props.title}
+          </Typography>
+        </Grid>
+        <Grid>
+          <IconButton aria-label="like" onClick={() => likeMechanism()}>
+            {like ? 
+              <FavoriteIcon
+                sx={{ color: "red"}}
+              />
+              :
+              <FavoriteBorderIcon
               sx={{ color: "red"}}
-            />
-            :
-            <FavoriteBorderIcon
-            sx={{ color: "red"}}
-            />
-          }
-        </IconButton>
-        <button onClick={() => flipMechanism()}>flip</button>
-      </div>
+              />
+            }
+          </IconButton>
+        </Grid>
+        
 
-    </ReactCardFlip>
-    {/* <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        component="img"
-        height="194"
-        image={props.url}
-        alt={props.title}
-      />
-      <CardContent>
-        <Typography variant="h5" color="text.secondary">
-          {props.title}
-        </Typography>
-        <Typography variant="h5" color="text.secondary">
-          {date}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {props.explanation}
-        </Typography>
-      </CardContent>
-      <IconButton aria-label="like" onClick={() => likeMechanism()}>
-        {like ? 
-          <FavoriteIcon
-            sx={{ color: "red"}}
-          />
-          :
-          <FavoriteBorderIcon
-          sx={{ color: "red"}}
-          />
-        }
-      </IconButton>
-    </Card> */}
+      </Grid>
+      {/* <Paper onClick={() => flipMechanism()} style={{background: "20"}}> */}
+        <ReactCardFlip isFlipped={flip} containerStyle={{width: "100%"}}>
+          <div style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370}} onClick={() => flipMechanism()}>
+            {/* <Typography className={styles.title}>
+              {props.title}
+            </Typography> */}
+            <CardMedia
+              component="img"
+              height="300"
+              image={props.url}
+              alt={props.title}
+            />
+            
+            {/* <button onClick={() => flipMechanism()}>flip</button> */}
+          </div>
+
+          <div className={styles.cardBack} style={{border: '2px solid white', height: 390}} onClick={() => flipMechanism()}>
+            {/* <Typography variant="h5" color="text.secondary"> */}
+            {/* <p>
+              {props.title}
+            </p> */}
+            {/* </Typography> */}
+            <h5>
+              {date}
+            </h5>
+            <p style={{padding: 10}}>{props.explanation}</p>
+              
+            
+            {/* <button onClick={() => flipMechanism()}>flip</button> */}
+          </div>
+
+        </ReactCardFlip>
+
+      {/* </Paper> */}
+      
+
+    </div>
+    
+    
     </>
-    // <div>
-    //   <p>{props.date}</p>
-    //   <p>{props.explanation}</p>
-    //   <p>{props.title}</p>
-    //   {like ? 
-    //     <p>liked</p>:
-    //     <p>not liked</p>
-    //   }
-    //   <button onClick={() => likeMechanism()}>like</button>
-    //   <img alt={props.title} src={props.url}/>
-    // </div>
   );
 }

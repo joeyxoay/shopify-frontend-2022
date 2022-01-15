@@ -49,7 +49,7 @@ export function NasaApp() {
 
 	return (
 		<>
-			<div>
+			<div style={{backgroundColor:"black"}}>
 				{imageArray == null ? null:
 					<Grid
 						container

@@ -1,4 +1,17 @@
 .cardBack p {
     overflow-y: auto;
-    max-height: 50%;
+    max-height: 70%;
+    color: white;
+}
+
+.cardBack h5 {
+    color: white;
+}
+
+.title {
+    /* vertical-align: 200; */
+    /* position: absolute; */
+    /* margin-top: 50px; */
+    font-weight:bolder;
+    text-shadow: 1px 1px 7px white;
 }
