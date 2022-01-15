@@ -4,6 +4,7 @@ import { SearchBar } from '../components/SearchBar';
 import { paths } from '../utils/constants';
 import { TrailingCursor } from '../components/TrailingCursor';
 import { BackgroundParticles } from '../components/BackgroundParticles';
+import Typist from 'react-typist';
 
 export function Home() {
     const redirectToBrowse = (input) => {
@@ -17,7 +18,7 @@ export function Home() {
                 <BackgroundParticles/>
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <p>Welcome! Search below for some awesome NASA pictures :)</p>
+                    <Typist startDelay={5}>Welcome! Search below for some awesome NASA pictures :)</Typist>
                     <SearchBar
                         redirect = {redirectToBrowse}
                     />
