@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getApodPics } from "../api/nasaApi";
 import { NasaCard } from "../components/NasaCard";
@@ -47,7 +48,18 @@ export function NasaApp() {
 	return (
 		<>
 			<div>
-				{imageArray !== null ? renderCards(): null};
+				{imageArray == null ? null:
+					<Grid
+						container
+						direction="row"
+						justify="space-around"
+						alignItems="center"
+					>
+						<Grid>
+							{renderCards()}
+						</Grid>
+					</Grid>
+				};
             </div>
 		</>
 	)
