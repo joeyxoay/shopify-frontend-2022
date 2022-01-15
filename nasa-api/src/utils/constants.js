@@ -4,5 +4,5 @@ export const paths = {
     BROWSE: '/browse'
 };
 export const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
 export const likeButtonColor = "red";
+export const backgroundColor = "black"

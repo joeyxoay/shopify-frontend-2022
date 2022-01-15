@@ -4,7 +4,10 @@ import { getApodPics } from "../api/nasaApi";
 import { NasaCard } from "../components/NasaCard";
 import Fade from 'react-reveal/Fade';
 import { TrailingCursor } from "../components/TrailingCursor";
-
+import { backgroundColor } from "../utils/constants";
+import "../style/NasaApp.css"
+import { BackgroundParticles } from "../components/BackgroundParticles";
+import Particles from "react-tsparticles";
 
 export function NasaApp() {
 	const [imageArray, setImageArray] = useState(null);
@@ -73,8 +76,9 @@ export function NasaApp() {
 
 	return (
 		<>
-			<div style={{backgroundColor:"black", padding: 20}}>
+			<div style={{backgroundColor: backgroundColor, padding: 20}}>
 				<TrailingCursor/>
+				<BackgroundParticles/>
 				{imageArray == null ? null:
 					<>
 						<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
@@ -87,7 +91,6 @@ export function NasaApp() {
 							{renderCards()}
 						</Grid>
 					</>
-					
 				};
             </div>
 		</>

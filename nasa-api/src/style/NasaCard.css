@@ -1,0 +1,35 @@
+.title {
+    font-weight:bolder;
+    text-shadow: 1px 1px 7px white;
+}
+
+.card{
+    cursor: pointer;
+}
+
+.cardFront{
+    padding: 10;
+    border: '2px solid white';
+    background-color:'white';
+    height: 370;
+    border-radius: 5;
+}
+
+.cardFront :hover{
+    opacity: 90%;
+}
+
+.cardBack{
+    border: '2px solid white';
+    height: 390;
+    border-radius: 5;
+}
+.cardBack-p {
+    overflow-y: auto;
+    max-height: 70%;
+    color: white;
+}
+
+.cardBack-h5 {
+    color: white;
+}
