@@ -2,7 +2,7 @@ import logo from '../logo.svg';
 import '../App.css';
 import { SearchBar } from '../components/SearchBar';
 import { paths } from '../utils/constants';
-import AnimatedCursor from "react-animated-cursor"
+import { TrailingCursor } from '../components/TrailingCursor';
 
 export function Home() {
     const redirectToBrowse = (input) => {
@@ -12,19 +12,10 @@ export function Home() {
     return (
         <>
             <div className="App">
-                <AnimatedCursor
-                    innerSize={8}
-                    outerSize={8}
-                    color='255, 255, 255'
-                    outerAlpha={0.2}
-                    innerScale={0.7}
-                    outerScale={5}
-                />
+                <TrailingCursor/>
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                    </p>
+                    <p>Welcome! Search below for some awesome NASA pictures :)</p>
                     <SearchBar
                         redirect = {redirectToBrowse}
                     />

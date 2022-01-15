@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { getApodPics } from "../api/nasaApi";
 import { NasaCard } from "../components/NasaCard";
 import Fade from 'react-reveal/Fade';
-import AnimatedCursor from "react-animated-cursor";
+import { TrailingCursor } from "../components/TrailingCursor";
 
 
 export function NasaApp() {
 	const [imageArray, setImageArray] = useState(null);
+	const [searchTitle, setSearchTitle] = useState("");
 
 	var currentURL = window.location.href;
 	var queryParam = currentURL.split("=").length === 1 ? "star" : currentURL.split("=")[1]
@@ -21,7 +22,7 @@ export function NasaApp() {
 			imageArray.map((image) => {
 				if(image.links[0].href[31] === "i"){
 					return(
-						<Grid item xs={12} md={6} lg={4}>
+						<Grid item xs={12} md={6} lg={4} style={{padding: 20}}>
 							<Fade bottom>
 								<NasaCard
 									key = {image.data[0].nasa_id}
@@ -52,28 +53,41 @@ export function NasaApp() {
         console.log(statusCode)
     }
 
+	const queryToTitle = (query) => {
+		let tempTitle = ""
+		let individualWords = [];
+		individualWords = query.split("%20");
+
+		tempTitle = individualWords[0][0].toUpperCase();
+		tempTitle += individualWords[0].substring(1, individualWords[0].length);
+		for (let i=1; i<individualWords.length; i++){
+			tempTitle += " " + individualWords[i][0].toUpperCase();
+			tempTitle += individualWords[i].substring(1, individualWords[i].length);
+		}
+		setSearchTitle(tempTitle);
+	}
+
+	useEffect(() => {
+		queryToTitle(queryParam);
+	}, [queryParam]);
+
 	return (
 		<>
-			<div style={{backgroundColor:"black"}}>
-				<AnimatedCursor
-                    innerSize={8}
-                    outerSize={8}
-                    color='255, 255, 255'
-                    outerAlpha={0.2}
-                    innerScale={0.7}
-                    outerScale={5}
-                />
+			<div style={{backgroundColor:"black", padding: 20}}>
+				<TrailingCursor/>
 				{imageArray == null ? null:
-					<Grid
-						container
-						direction="row"
-						justify="space-around"
-						alignItems="center"
-					>
-						{/* <Grid item xs={12} md={6} lg={6}> */}
+					<>
+						<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
+						<Grid
+							container
+							direction="row"
+							justify="space-around"
+							alignItems="center"
+						>
 							{renderCards()}
-						{/* </Grid> */}
-					</Grid>
+						</Grid>
+					</>
+					
 				};
             </div>
 		</>

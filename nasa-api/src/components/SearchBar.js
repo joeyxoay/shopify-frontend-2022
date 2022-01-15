@@ -8,9 +8,13 @@ export function SearchBar({redirect}) {
         onSubmit={e => {
             e.preventDefault();
         }}>
-        <TextField id="outlined-basic" variant="outlined" type="search"
+        <TextField 
+            id="outlined-basic" 
+            variant="outlined" 
+            type="search"
             fullWidth
             autoComplete='off'
+            color = "primary"
             onKeyPress={(e) => {
                 if (e.key === 'Enter') {
                     redirect(e.target.value);

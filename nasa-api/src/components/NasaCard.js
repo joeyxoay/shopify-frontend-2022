@@ -4,7 +4,7 @@ import { Grid, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ReactCardFlip from 'react-card-flip';
-import { months } from "../utils/constants";
+import { likeButtonColor, months } from "../utils/constants";
 import styles from "../style/NasaCard.module.css"
 
 
@@ -33,7 +33,7 @@ export function NasaCard(props) {
 
   return (
     <>
-    <div style={{textAlign: "center", margin: 20}} className={styles.card}>
+    <div style={{textAlign: "center"}} className={styles.card}>
       <Grid
         container
         direction="row"
@@ -48,13 +48,9 @@ export function NasaCard(props) {
         <Grid>
           <IconButton aria-label="like" onClick={() => likeMechanism()}>
             {like ? 
-              <FavoriteIcon
-                sx={{ color: "red"}}
-              />
+              <FavoriteIcon sx={{ color: likeButtonColor}}/>
               :
-              <FavoriteBorderIcon
-              sx={{ color: "red"}}
-              />
+              <FavoriteBorderIcon sx={{ color: likeButtonColor}}/>
             }
           </IconButton>
         </Grid>
@@ -64,7 +60,7 @@ export function NasaCard(props) {
           isFlipped={flip} 
           containerStyle={{width: "100%"}}
         >
-          <div style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370}} onClick={() => flipMechanism()}>
+          <div style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370, borderRadius: 5}} onClick={() => flipMechanism()}>
             <CardMedia
               component="img"
               height="300"
@@ -73,13 +69,10 @@ export function NasaCard(props) {
             />
           </div>
 
-          <div className={styles.cardBack} style={{border: '2px solid white', height: 390}} onClick={() => flipMechanism()}>
-            <h5>
-              {date}
-            </h5>
+          <div className={styles.cardBack} style={{border: '2px solid white', height: 390, borderRadius: 5}} onClick={() => flipMechanism()}>
+            <h5>{date}</h5>
             <p style={{padding: 10}}>{props.explanation}</p>
           </div>
-
         </ReactCardFlip>
     </div>
     </>
