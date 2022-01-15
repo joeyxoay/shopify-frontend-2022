@@ -9,9 +9,10 @@
 }
 
 .title {
-    /* vertical-align: 200; */
-    /* position: absolute; */
-    /* margin-top: 50px; */
     font-weight:bolder;
     text-shadow: 1px 1px 7px white;
+}
+
+.card{
+    cursor: pointer;
 }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { CardContent, CardMedia, Typography } from "@material-ui/core";
-import { Grid, IconButton, Paper } from "@mui/material";
-import Card from '@mui/material/Card';
-import { styled } from '@mui/material/styles';
+import { CardMedia, Typography } from "@material-ui/core";
+import { Grid, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ReactCardFlip from 'react-card-flip';
@@ -31,11 +29,11 @@ export function NasaCard(props) {
 
   useEffect(() => {
 		dateFormatter(props.date);
-	}, []);
+	}, [props.date]);
 
   return (
     <>
-    <div style={{textAlign: "center", margin: 20}}>
+    <div style={{textAlign: "center", margin: 20}} className={styles.card}>
       <Grid
         container
         direction="row"
@@ -60,48 +58,30 @@ export function NasaCard(props) {
             }
           </IconButton>
         </Grid>
-        
 
       </Grid>
-      {/* <Paper onClick={() => flipMechanism()} style={{background: "20"}}> */}
-        <ReactCardFlip isFlipped={flip} containerStyle={{width: "100%"}}>
+        <ReactCardFlip 
+          isFlipped={flip} 
+          containerStyle={{width: "100%"}}
+        >
           <div style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370}} onClick={() => flipMechanism()}>
-            {/* <Typography className={styles.title}>
-              {props.title}
-            </Typography> */}
             <CardMedia
               component="img"
               height="300"
               image={props.url}
               alt={props.title}
             />
-            
-            {/* <button onClick={() => flipMechanism()}>flip</button> */}
           </div>
 
           <div className={styles.cardBack} style={{border: '2px solid white', height: 390}} onClick={() => flipMechanism()}>
-            {/* <Typography variant="h5" color="text.secondary"> */}
-            {/* <p>
-              {props.title}
-            </p> */}
-            {/* </Typography> */}
             <h5>
               {date}
             </h5>
             <p style={{padding: 10}}>{props.explanation}</p>
-              
-            
-            {/* <button onClick={() => flipMechanism()}>flip</button> */}
           </div>
 
         </ReactCardFlip>
-
-      {/* </Paper> */}
-      
-
     </div>
-    
-    
     </>
   );
 }

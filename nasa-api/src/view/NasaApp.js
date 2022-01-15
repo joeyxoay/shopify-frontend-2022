@@ -2,16 +2,19 @@ import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getApodPics } from "../api/nasaApi";
 import { NasaCard } from "../components/NasaCard";
+import Fade from 'react-reveal/Fade';
+import AnimatedCursor from "react-animated-cursor";
+
 
 export function NasaApp() {
 	const [imageArray, setImageArray] = useState(null);
 
 	var currentURL = window.location.href;
-	var queryParam = currentURL.split("=").length == 1 ? "star" : currentURL.split("=")[1]
+	var queryParam = currentURL.split("=").length === 1 ? "star" : currentURL.split("=")[1]
 
 	useEffect(() => {
 		getApodPics(queryParam, successCallback, failCallback)
-	}, []);
+	}, [queryParam]);
 
 	const renderCards = () => {
 		return (
@@ -19,14 +22,16 @@ export function NasaApp() {
 				if(image.links[0].href[31] === "i"){
 					return(
 						<Grid item xs={12} md={6} lg={4}>
-							<NasaCard
-								key = {image.data[0].nasa_id}
-								date = {image.data[0].date_created}
-								explanation = {image.data[0].description}
-								title = {image.data[0].title}
-								url = {image.links[0].href}
-								favorite = {image.favorite}
-							/>
+							<Fade bottom>
+								<NasaCard
+									key = {image.data[0].nasa_id}
+									date = {image.data[0].date_created}
+									explanation = {image.data[0].description}
+									title = {image.data[0].title}
+									url = {image.links[0].href}
+									favorite = {image.favorite}
+								/>
+							</Fade>
 						</Grid>
 					)
 				}
@@ -50,6 +55,14 @@ export function NasaApp() {
 	return (
 		<>
 			<div style={{backgroundColor:"black"}}>
+				<AnimatedCursor
+                    innerSize={8}
+                    outerSize={8}
+                    color='255, 255, 255'
+                    outerAlpha={0.2}
+                    innerScale={0.7}
+                    outerScale={5}
+                />
 				{imageArray == null ? null:
 					<Grid
 						container
