@@ -6,12 +6,12 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ReactCardFlip from 'react-card-flip';
 import { likeButtonColor, months } from "../utils/constants";
 import "../style/NasaCard.css"
-
+import ShareIcon from '@mui/icons-material/Share';
 
 export function NasaCard(props) {
   const [like, setLike] = useState(false);
   const [date, setDate] = useState("");
-  const [flip, setFlip] = useState(false);
+  const [flip, setFlip] = useState(props.clicked);
 
   const likeMechanism = () => {
     like ? setLike(false) : setLike(true);
@@ -20,8 +20,17 @@ export function NasaCard(props) {
     flip ? setFlip(false) : setFlip(true);
   }
 
+  const copyMechanism = () => {
+    var website = "";
+    if(window.location.href.indexOf("?") !== -1){
+      website += window.location.href.split("?")[0];
+    }else{
+      website += window.location.href;
+    }
+    website += "?search=" + props.search + "&pic=" + props.id
+    navigator.clipboard.writeText(website)
+  }
   
-
   useEffect(() => {
     const dateFormatter = (rawDate) => {
       var tempDate = "";
@@ -34,8 +43,7 @@ export function NasaCard(props) {
 	}, [props.date]);
 
   return (
-    <>
-    <div style={{textAlign: "center"}}  className="card">
+    <div style={{textAlign: "center"}}  className="card" id={props.id}>
       <Grid
         container
         direction="row"
@@ -55,11 +63,14 @@ export function NasaCard(props) {
               <FavoriteBorderIcon sx={{ color: likeButtonColor}}/>
             }
           </IconButton>
+          <IconButton aria-label="like" onClick={() => copyMechanism()}>
+              <ShareIcon sx={{ color: "white"}}/>
+          </IconButton>
         </Grid>
 
       </Grid>
         <ReactCardFlip isFlipped={flip} >
-          <div className = "cardFront" style={{height: "100%", backgroundColor: "gray"}}>
+          <div className = "cardFront" style={{height: "100%", backgroundColor: "gray"}} id={"cardFront"}>
             <div className="cardPic" style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370, borderRadius: 5}} onClick={() => flipMechanism()}>
               <CardMedia
                 component="img"
@@ -76,6 +87,5 @@ export function NasaCard(props) {
           </div>
         </ReactCardFlip>
     </div>
-    </>
   );
 }

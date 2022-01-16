@@ -3,28 +3,19 @@ import TextField from '@material-ui/core/TextField';
 
 export function SearchBar({redirect}) {
   return (
-    <div>
-      <form style={{ flexGrow: 1 }}
-        onSubmit={e => {
-            e.preventDefault();
-        }}>
-        <TextField 
-            id="outlined-basic" 
-            variant="outlined" 
-            type="search"
-            fullWidth
-            autoComplete='off'
-            color = "primary"
-            onKeyPress={(e) => {
-                if (e.key === 'Enter') {
-                    redirect(e.target.value);
-                }
-            }}
-            placeholder={"Type here..."}
-            data-cy="searchBox"
-        />
-        
-    </form>
-    </div>
+      <TextField 
+          id="standard-basic" 
+          variant="standard" 
+          type="search"
+          fullWidth
+          autoComplete='off'
+          style={{background: "white", borderRadius: 50, paddingLeft:10, paddingRight:10}}
+          onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                  redirect(e.target.value);
+              }
+          }}
+          placeholder={"Type here..."}
+      />
   );
 }

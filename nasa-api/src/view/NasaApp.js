@@ -18,13 +18,10 @@ export function NasaApp() {
 	const [enableEnd, setEnableEnd] = useState(false);
 	const [startDate, setStartDate] = useState(new Date("2000-01-01 00:00:00"));
 	const [endDate, setEndDate] = useState(new Date());
+	const [queryParam, setQueryParam] = useState("");
+	const [queryPic, setQueryPic] = useState("");
 
 	var currentURL = window.location.href;
-	var queryParam = currentURL.split("=").length === 1 ? "star" : currentURL.split("=")[1]
-
-	useEffect(() => {
-		getApodPics(queryParam, successCallback, failCallback)
-	}, [queryParam]);
 
 	const renderCards = () => {
 		return (
@@ -37,11 +34,14 @@ export function NasaApp() {
 									<Fade bottom>
 										<NasaCard
 											key = {image.data[0].nasa_id}
+											id = {image.data[0].nasa_id}
 											date = {image.data[0].date_created}
 											explanation = {image.data[0].description}
 											title = {image.data[0].title}
 											url = {image.links[0].href}
 											favorite = {image.favorite}
+											search = {queryParam}
+											clicked = {queryPic.length !== 0 && queryPic === image.data[0].nasa_id}
 										/>
 									</Fade>
 								</Grid>
@@ -60,6 +60,10 @@ export function NasaApp() {
 			return null;
 		});
 		setImageArray(body);
+		queryToTitle(queryParam);
+		if(queryPic.length !== 0){
+			scrollToPic();
+		}
     }
 
     const failCallback = (statusCode) => {
@@ -80,64 +84,81 @@ export function NasaApp() {
 		setSearchTitle(tempTitle);
 	}
 
+	const scrollToPic = () => {
+		document.getElementById(queryPic).scrollIntoView({
+			behavior: 'smooth'
+		});
+	}
+
 	useEffect(() => {
-		queryToTitle(queryParam);
+		const grabbingQuery = () => {
+			if(currentURL.indexOf("?search=") !== -1){
+				if(currentURL.indexOf("&") === -1){
+					setQueryParam(currentURL.split("=")[1]);
+				}else{
+					setQueryParam(currentURL.substring(currentURL.indexOf("=")+1, currentURL.indexOf("&")));
+					setQueryPic(currentURL.split("pic=")[1]);
+				}
+			}else{
+				setQueryParam("star");
+			}
+		}
+		grabbingQuery();
+		getApodPics(queryParam, successCallback, failCallback);
 	}, [queryParam]);
 
 	return (
-		<>
-			<div style={{backgroundColor: backgroundColor, padding: 20}}>
-				<TrailingCursor/>
-				<BackgroundParticles/>
-				{imageArray == null ? 
-					<div style={{minHeight: "100vh"}}>
-						<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
-					</div>
-				:
-					<div style={{minHeight: "100vh"}}>
-						<Grid
-							container
-							direction="row"
-							justifyContent="space-between"
-							alignItems="center"
-						>
-							<Grid item xs={12} md={4} lg={4}>
-							<IconButton aria-label="like" onClick={() => window.location.href = paths.HOME}>
-								<ArrowBackIcon sx={{ color: "white"}}/>
-							</IconButton>
-							</Grid>
-							<Grid item xs={12} md={4} lg={4}>
-								<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
-							</Grid>
-							<Grid container xs={12} md={4} lg={4}>
-								<DateSelector
-									date = {startDate}
-									setDate = {setStartDate}
-									title = {"Starting Date"}
-									enable = {enableStart}
-									setEnable = {setEnableStart}
-								/>
-								<DateSelector
-									date = {endDate}
-									setDate = {setEndDate}
-									title = {"End Date"}
-									enable = {enableEnd}
-									setEnable = {setEnableEnd}
-								/>
-							</Grid>
+		<div style={{backgroundColor: backgroundColor, padding: 20}}>
+			<TrailingCursor/>
+			<BackgroundParticles/>
+			{imageArray == null ? 
+				<div style={{minHeight: "100vh"}}>
+					<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
+				</div>
+			:
+				<div style={{minHeight: "100vh"}}>
+					<Grid
+						container
+						direction="row"
+						justifyContent="space-between"
+						alignItems="center"
+					>
+						<Grid item xs={12} md={4} lg={4}>
+						<IconButton aria-label="like" onClick={() => window.location.href = paths.HOME}>
+							<ArrowBackIcon sx={{ color: "white"}}/>
+						</IconButton>
 						</Grid>
-						
-						<Grid
-							container
-							direction="row"
-							justify="space-around"
-							alignItems="center"
-						>
-							{renderCards()}
+						<Grid item xs={12} md={4} lg={4}>
+							<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
 						</Grid>
-					</div>
-				};
-            </div>
-		</>
+						<Grid container xs={12} md={4} lg={4}>
+							<DateSelector
+								date = {startDate}
+								setDate = {setStartDate}
+								title = {"Starting Date"}
+								enable = {enableStart}
+								setEnable = {setEnableStart}
+							/>
+							<DateSelector
+								date = {endDate}
+								setDate = {setEndDate}
+								title = {"End Date"}
+								enable = {enableEnd}
+								setEnable = {setEnableEnd}
+							/>
+						</Grid>
+					</Grid>
+					
+					<Grid
+						container
+						direction="row"
+						justify="space-around"
+						alignItems="center"
+					>
+						{renderCards()}
+					</Grid>
+				</div>
+			};
+		</div>
 	)
 }

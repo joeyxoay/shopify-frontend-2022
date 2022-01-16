@@ -12,18 +12,18 @@ export function Home() {
     }
 
     return (
-        <>
-            <div className="App">
-                <TrailingCursor/>
-                <BackgroundParticles/>
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <Typist startDelay={5}>Welcome! Search below for some awesome NASA pictures :)</Typist>
+        <div className="App">
+            <TrailingCursor/>
+            <BackgroundParticles/>
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+                <Typist startDelay={5}>Welcome! Search below for some awesome NASA pictures :)</Typist>
+                <div>
                     <SearchBar
                         redirect = {redirectToBrowse}
                     />
-                </header>
-            </div>
-        </>
+                </div>
+            </header>
+        </div>
     );
 }
