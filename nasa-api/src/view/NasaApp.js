@@ -21,6 +21,7 @@ export function NasaApp() {
 	const [endDate, setEndDate] = useState(new Date());
 	const [queryParam, setQueryParam] = useState("");
 	const [queryPic, setQueryPic] = useState("");
+	const [apiFailed, setApiFailed] = useState(false);
 
 	var currentURL = window.location.href;
 
@@ -68,7 +69,10 @@ export function NasaApp() {
     }
 
     const failCallback = (statusCode) => {
-        console.log(statusCode)
+        console.log(statusCode);
+		setTimeout(() => {
+			setApiFailed(true);
+		 }, 2000)
     }
 
 	const queryToTitle = (query) => {
@@ -119,8 +123,11 @@ export function NasaApp() {
 						display={"flex"}
 						justifyContent={"center"}
 					>
-						<ReactLoading type={"bubbles"} color="#fff"/>
-
+						{apiFailed ? 
+							<h1 style={{color: "white", textAlign: "center"}}>Some aliens have interupted our signals, please try again later!</h1>
+							:
+							<ReactLoading type={"bubbles"} color="#fff"/>
+						}
 					</Grid>
 				</div>
 			:
