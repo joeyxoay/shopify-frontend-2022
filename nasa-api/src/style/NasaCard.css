@@ -1,6 +1,7 @@
 .title {
     font-weight:bolder;
-    text-shadow: 1px 1px 7px white;
+    text-shadow: 1px 1px 7px yellow;
+    color: white;
 }
 
 .card{
@@ -11,17 +12,21 @@
     padding: 10;
     border: '2px solid white';
     background-color:'white';
-    height: 370;
     border-radius: 5;
 }
 
 .cardFront :hover{
     opacity: 90%;
+    transform: scale(1.05);
+}
+.cardPic :hover{
+    opacity: 100%;
+    transform: scale(1.0);
 }
 
 .cardBack{
     border: '2px solid white';
-    height: 390;
+    /* height: 390; */
     border-radius: 5;
 }
 .cardBack-p {

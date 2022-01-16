@@ -14,5 +14,4 @@ export async function getApodPics(searchQuery, successCallback, failCallback) {
             })
         }
 	})
-	.catch(error => console.log(error));
 }

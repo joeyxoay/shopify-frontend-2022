@@ -20,14 +20,16 @@ export function NasaCard(props) {
     flip ? setFlip(false) : setFlip(true);
   }
 
-  const dateFormatter = (rawDate) => {
-    var tempDate = "";
-    tempDate += months[parseInt(rawDate.substring(5,7)-1)];
-    tempDate += " " + rawDate.substring(8,10) + " " + rawDate.substring(0,4);
-    setDate(tempDate);
-  }
+  
 
   useEffect(() => {
+    const dateFormatter = (rawDate) => {
+      var tempDate = "";
+      tempDate += months[parseInt(rawDate.substring(5,7)-1)];
+      tempDate += " " + rawDate.substring(8,10) + " " + rawDate.substring(0,4);
+      setDate(tempDate);
+    }
+
 		dateFormatter(props.date);
 	}, [props.date]);
 
@@ -58,7 +60,7 @@ export function NasaCard(props) {
       </Grid>
         <ReactCardFlip isFlipped={flip} >
           <div className = "cardFront" style={{height: "100%", backgroundColor: "gray"}}>
-            <div  style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370, borderRadius: 5}} onClick={() => flipMechanism()}>
+            <div className="cardPic" style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370, borderRadius: 5}} onClick={() => flipMechanism()}>
               <CardMedia
                 component="img"
                 height="300"

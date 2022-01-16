@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { getApodPics } from "../api/nasaApi";
 import { NasaCard } from "../components/NasaCard";
 import Fade from 'react-reveal/Fade';
 import { TrailingCursor } from "../components/TrailingCursor";
-import { backgroundColor } from "../utils/constants";
+import { backgroundColor, paths } from "../utils/constants";
 import { BackgroundParticles } from "../components/BackgroundParticles";
 import { DateSelector } from "../components/DateSelecter";
 import "../style/NasaApp.css";
 import "react-datepicker/dist/react-datepicker.css";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 export function NasaApp() {
 	const [imageArray, setImageArray] = useState(null);
 	const [searchTitle, setSearchTitle] = useState("");
 	const [enableStart, setEnableStart] = useState(false);
 	const [enableEnd, setEnableEnd] = useState(false);
-	const [startDate, setStartDate] = useState(new Date("2006-01-04 10:34:23"));
+	const [startDate, setStartDate] = useState(new Date("2000-01-01 00:00:00"));
 	const [endDate, setEndDate] = useState(new Date());
 
 	var currentURL = window.location.href;
@@ -28,7 +29,7 @@ export function NasaApp() {
 	const renderCards = () => {
 		return (
 			imageArray.map((image) => {
-				if(image.links[0].href[31] === "i"){
+				if(image.links != null && image.links[0].href[31] === "i"){
 					if(!enableStart || Date.parse(image.data[0].date_created) >= Date.parse(startDate.toString())){
 						if(!enableEnd || Date.parse(image.data[0].date_created) <= Date.parse(endDate.toString())){
 							return(
@@ -100,7 +101,11 @@ export function NasaApp() {
 							justifyContent="space-between"
 							alignItems="center"
 						>
-							<Grid item xs={12} md={4} lg={4}/>
+							<Grid item xs={12} md={4} lg={4}>
+							<IconButton aria-label="like" onClick={() => window.location.href = paths.HOME}>
+								<ArrowBackIcon sx={{ color: "white"}}/>
+							</IconButton>
+							</Grid>
 							<Grid item xs={12} md={4} lg={4}>
 								<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
 							</Grid>
