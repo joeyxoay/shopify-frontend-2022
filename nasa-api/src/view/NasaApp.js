@@ -10,6 +10,7 @@ import { DateSelector } from "../components/DateSelecter";
 import "../style/NasaApp.css";
 import "react-datepicker/dist/react-datepicker.css";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ReactLoading from "react-loading";
 
 export function NasaApp() {
 	const [imageArray, setImageArray] = useState(null);
@@ -114,6 +115,13 @@ export function NasaApp() {
 			{imageArray == null ? 
 				<div style={{minHeight: "100vh"}}>
 					<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
+					<Grid
+						display={"flex"}
+						justifyContent={"center"}
+					>
+						<ReactLoading type={"bubbles"} color="#fff"/>
+
+					</Grid>
 				</div>
 			:
 				<div style={{minHeight: "100vh"}}>
