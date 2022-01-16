@@ -4,7 +4,7 @@ import { Grid, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ReactCardFlip from 'react-card-flip';
-import { likeButtonColor, months } from "../utils/constants";
+import { buttonColor, clickedButtonColor, likeButtonColor, months } from "../utils/constants";
 import "../style/NasaCard.css"
 import ShareIcon from '@mui/icons-material/Share';
 
@@ -12,6 +12,7 @@ export function NasaCard(props) {
   const [like, setLike] = useState(false);
   const [date, setDate] = useState("");
   const [flip, setFlip] = useState(props.clicked);
+  const [share, setShare] = useState(false);
 
   const likeMechanism = () => {
     like ? setLike(false) : setLike(true);
@@ -21,6 +22,7 @@ export function NasaCard(props) {
   }
 
   const copyMechanism = () => {
+    setShare(true);
     var website = "";
     if(window.location.href.indexOf("?") !== -1){
       website += window.location.href.split("?")[0];
@@ -29,8 +31,11 @@ export function NasaCard(props) {
     }
     website += "?search=" + props.search + "&pic=" + props.id
     navigator.clipboard.writeText(website)
+    setTimeout(() => {
+      setShare(false);
+   }, 200)
   }
-  
+
   useEffect(() => {
     const dateFormatter = (rawDate) => {
       var tempDate = "";
@@ -57,14 +62,17 @@ export function NasaCard(props) {
         </Grid>
         <Grid>
           <IconButton aria-label="like" onClick={() => likeMechanism()}>
-            {like ? 
-              <FavoriteIcon sx={{ color: likeButtonColor}}/>
-              :
-              <FavoriteBorderIcon sx={{ color: likeButtonColor}}/>
-            }
+            <ReactCardFlip isFlipped={like} onClick={() => likeMechanism()}>
+                <FavoriteBorderIcon sx={{ color: likeButtonColor}}/>
+                <FavoriteIcon sx={{ color: likeButtonColor}}/>
+            </ReactCardFlip>
           </IconButton>
           <IconButton aria-label="like" onClick={() => copyMechanism()}>
-              <ShareIcon sx={{ color: "white"}}/>
+            {share ? 
+              <ShareIcon sx={{ color: clickedButtonColor}}/>
+              :
+              <ShareIcon sx={{ color: buttonColor}}/>
+            }
           </IconButton>
         </Grid>
 

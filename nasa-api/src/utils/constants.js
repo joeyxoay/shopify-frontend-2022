@@ -5,4 +5,6 @@ export const paths = {
 };
 export const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 export const likeButtonColor = "red";
+export const buttonColor = "white";
+export const clickedButtonColor = "yellow";
 export const backgroundColor = "black"
