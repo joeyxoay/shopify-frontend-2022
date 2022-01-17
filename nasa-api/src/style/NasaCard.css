@@ -1,40 +1,50 @@
-.title {
+.WholeCard h1 {
     font-weight:bolder;
     text-shadow: 1px 1px 7px yellow;
     color: white;
+    font-size: 20px;
 }
 
-.card{
+.Card{
     cursor: pointer;
+    text-align: center;
 }
 
-.cardFront{
-    padding: 10;
-    border: '2px solid white';
-    background-color:'white';
-    border-radius: 5;
+.Card :hover{
+    opacity: 100%;
+    transform: scale(1.01);
 }
 
-.cardFront :hover{
-    opacity: 90%;
-    transform: scale(1.05);
+.CardPic{
+    padding: 10px;
+    border: 2px;
+    border-color: white;
+    background-color:white;
+    border-radius: 5px;
+    height: 370px;
+    border-style: solid;
 }
-.cardPic :hover{
+
+.CardPic :hover{
     opacity: 100%;
     transform: scale(1.0);
 }
 
-.cardBack{
-    border: '2px solid white';
-    /* height: 390; */
-    border-radius: 5;
+.CardBack{
+    border: 2px;
+    border-color: white;
+    height: 390px;
+    border-radius: 5px;
+    border-style: solid;
 }
-.cardBack-p {
+
+.CardBack p {
     overflow-y: auto;
     max-height: 70%;
     color: white;
 }
 
-.cardBack-h5 {
+.CardBack h5 {
     color: white;
+    padding: 10px;
 }

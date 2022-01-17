@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardMedia, Typography } from "@material-ui/core";
+import { CardMedia } from "@material-ui/core";
 import { Grid, IconButton } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -48,7 +48,7 @@ export function NasaCard(props) {
 	}, [props.date]);
 
   return (
-    <div style={{textAlign: "center"}}  className="card" id={props.id}>
+    <div className="WholeCard" id={props.id}>
       <Grid
         container
         direction="row"
@@ -56,30 +56,32 @@ export function NasaCard(props) {
         alignItems="center"
       >
         <Grid style={{width: "80%"}}>
-          <Typography className="title" style={{fontWeight: "bolder", fontSize:20}}>
-            {props.title}
-          </Typography>
+          <h1> {props.title}</h1>
         </Grid>
         <Grid>
-          <IconButton aria-label="like" onClick={() => likeMechanism()}>
-            <ReactCardFlip isFlipped={like} onClick={() => likeMechanism()}>
+          
+          <IconButton onClick={() => likeMechanism()}>
+            <ReactCardFlip isFlipped={like}>
                 <FavoriteBorderIcon sx={{ color: likeButtonColor}}/>
                 <FavoriteIcon sx={{ color: likeButtonColor}}/>
             </ReactCardFlip>
           </IconButton>
-          <IconButton aria-label="like" onClick={() => copyMechanism()}>
+
+          <IconButton onClick={() => copyMechanism()}>
             {share ? 
               <ShareIcon sx={{ color: clickedButtonColor}}/>
               :
               <ShareIcon sx={{ color: buttonColor}}/>
             }
           </IconButton>
-        </Grid>
 
+        </Grid>
       </Grid>
+
+      <div className="Card" onClick={() => flipMechanism()}>
         <ReactCardFlip isFlipped={flip} >
-          <div className = "cardFront" style={{height: "100%", backgroundColor: "gray"}} id={"cardFront"}>
-            <div className="cardPic" style={{padding: 10, border: '2px solid white', backgroundColor:'white', height: 370, borderRadius: 5}} onClick={() => flipMechanism()}>
+          <div className = "CardFront" >
+            <div className="CardPic" >
               <CardMedia
                 component="img"
                 height="300"
@@ -89,11 +91,13 @@ export function NasaCard(props) {
             </div>
           </div>
 
-          <div style={{border: '2px solid white', height: 390, borderRadius: 5}} onClick={() => flipMechanism()}>
-            <h5 className="cardBack-h5">{date}</h5>
-            <p className="cardBack-p" style={{padding: 10}}>{props.explanation}</p>
+          <div className="CardBack">
+            <h5>{date}</h5>
+            <p>{props.explanation}</p>
           </div>
         </ReactCardFlip>
+      </div>
+        
     </div>
   );
 }

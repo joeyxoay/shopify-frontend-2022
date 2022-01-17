@@ -1,0 +1,17 @@
+.MainPage {
+    background-color: black;
+    padding: 20px;
+}
+
+.MinHeight {
+    min-height: 100vh;
+}
+
+.MinHeight h1{
+    color: white;
+    text-align: center;
+}
+
+.NasaCardGrid {
+    padding: 20px;
+}

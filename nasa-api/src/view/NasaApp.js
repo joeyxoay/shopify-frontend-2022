@@ -4,7 +4,7 @@ import { getApodPics } from "../api/nasaApi";
 import { NasaCard } from "../components/NasaCard";
 import Fade from 'react-reveal/Fade';
 import { TrailingCursor } from "../components/TrailingCursor";
-import { backgroundColor, paths } from "../utils/constants";
+import { paths } from "../utils/constants";
 import { BackgroundParticles } from "../components/BackgroundParticles";
 import { DateSelector } from "../components/DateSelecter";
 import "../style/NasaApp.css";
@@ -32,7 +32,7 @@ export function NasaApp() {
 					if(!enableStart || Date.parse(image.data[0].date_created) >= Date.parse(startDate.toString())){
 						if(!enableEnd || Date.parse(image.data[0].date_created) <= Date.parse(endDate.toString())){
 							return(
-								<Grid item xs={12} md={6} lg={4} style={{padding: 20}}>
+								<Grid item xs={12} md={6} lg={4} className = "NasaCardGrid">
 									<Fade bottom>
 										<NasaCard
 											key = {image.data[0].nasa_id}
@@ -113,25 +113,25 @@ export function NasaApp() {
 	}, [queryParam]);
 
 	return (
-		<div style={{backgroundColor: backgroundColor, padding: 20}}>
+		<div className = "MainPage">
 			<TrailingCursor/>
 			<BackgroundParticles/>
 			{imageArray == null ? 
-				<div style={{minHeight: "100vh"}}>
-					<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
+				<div className="MinHeight">
+					<h1>{searchTitle}</h1>
 					<Grid
 						display={"flex"}
 						justifyContent={"center"}
 					>
 						{apiFailed ? 
-							<h1 style={{color: "white", textAlign: "center"}}>Some aliens have interupted our signals, please try again later!</h1>
+							<h1>Some aliens have interupted our signals, please try again later!</h1>
 							:
-							<ReactLoading type={"bubbles"} color="#fff"/>
+							<ReactLoading type={"bubbles"} color="#FFF"/>
 						}
 					</Grid>
 				</div>
 			:
-				<div style={{minHeight: "100vh"}}>
+				<div className="MinHeight">
 					<Grid
 						container
 						direction="row"
@@ -144,7 +144,7 @@ export function NasaApp() {
 						</IconButton>
 						</Grid>
 						<Grid item xs={12} md={4} lg={4}>
-							<h1 style={{color: "white", textAlign: "center"}}>{searchTitle}</h1>
+							<h1>{searchTitle}</h1>
 						</Grid>
 						<Grid container xs={12} md={4} lg={4}>
 							<DateSelector

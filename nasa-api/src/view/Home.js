@@ -18,7 +18,7 @@ export function Home() {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <Typist startDelay={5}>Welcome! Search below for some awesome NASA pictures :)</Typist>
-                <div>
+                <div className="SearchDiv">
                     <SearchBar
                         redirect = {redirectToBrowse}
                     />

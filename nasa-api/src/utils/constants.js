@@ -7,4 +7,3 @@ export const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "Jul", "Aug", 
 export const likeButtonColor = "red";
 export const buttonColor = "white";
 export const clickedButtonColor = "yellow";
-export const backgroundColor = "black"
