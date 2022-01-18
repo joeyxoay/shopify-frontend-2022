@@ -24,6 +24,7 @@ export function NasaApp() {
 	const [apiFailed, setApiFailed] = useState(false);
 
 	var currentURL = window.location.href;
+	var likedPics = localStorage.getItem("likedPics").split(",");
 
 	const renderCards = () => {
 		return (
@@ -44,6 +45,7 @@ export function NasaApp() {
 											favorite = {image.favorite}
 											search = {queryParam}
 											clicked = {queryPic.length !== 0 && queryPic === image.data[0].nasa_id}
+											likedArray = {likedPics}
 										/>
 									</Fade>
 								</Grid>
@@ -54,18 +56,6 @@ export function NasaApp() {
 				return null;
 			})
 		)
-    }
-
-	const successCallback = (body) => {
-		body.map((image) => {
-			image.favorite = false;
-			return null;
-		});
-		setImageArray(body);
-		queryToTitle(queryParam);
-		if(queryPic.length !== 0){
-			scrollToPic();
-		}
     }
 
     const failCallback = (statusCode) => {
@@ -89,13 +79,26 @@ export function NasaApp() {
 		setSearchTitle(tempTitle);
 	}
 
-	const scrollToPic = () => {
-		document.getElementById(queryPic).scrollIntoView({
-			behavior: 'smooth'
-		});
-	}
-
+	
 	useEffect(() => {
+		const scrollToPic = () => {
+			document.getElementById(queryPic).scrollIntoView({
+				behavior: 'smooth'
+			});
+		}
+
+		const successCallback = (body) => {
+			body.map((image) => {
+				image.favorite = false;
+				return null;
+			});
+			setImageArray(body);
+			queryToTitle(queryParam);
+			if(queryPic.length !== 0){
+				scrollToPic();
+			}
+		}
+
 		const grabbingQuery = () => {
 			if(currentURL.indexOf("?search=") !== -1){
 				if(currentURL.indexOf("&") === -1){
@@ -110,7 +113,7 @@ export function NasaApp() {
 		}
 		grabbingQuery();
 		getApodPics(queryParam, successCallback, failCallback);
-	}, [queryParam]);
+	}, [queryParam, currentURL, queryPic]);
 
 	return (
 		<div className = "MainPage">
@@ -163,6 +166,7 @@ export function NasaApp() {
 							/>
 						</Grid>
 					</Grid>
+					{imageArray.length === 0 ? <h1>No images found :(</h1>:null}
 					
 					<Grid
 						container

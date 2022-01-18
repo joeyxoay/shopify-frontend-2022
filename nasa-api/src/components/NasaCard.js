@@ -9,14 +9,33 @@ import "../style/NasaCard.css"
 import ShareIcon from '@mui/icons-material/Share';
 
 export function NasaCard(props) {
-  const [like, setLike] = useState(false);
+  const [like, setLike] = useState(props.likedArray.includes(props.id));
   const [date, setDate] = useState("");
   const [flip, setFlip] = useState(props.clicked);
   const [share, setShare] = useState(false);
 
   const likeMechanism = () => {
-    like ? setLike(false) : setLike(true);
+    if(like){
+      removeFromArray(props.likedArray, props.id)
+      setLike(false)
+    }else{
+      props.likedArray.push(props.id)
+      setLike(true);
+    }
+    updateLocalStorage(props.likedArray);
   }
+
+  function updateLocalStorage(array){
+    localStorage.setItem("likedPics", array.join());
+  }
+
+  function removeFromArray(array, id){
+    const index = array.indexOf(id);
+    if(index > -1) {
+      array.splice(index, 1);
+    }
+  }
+
   const flipMechanism = () => {
     flip ? setFlip(false) : setFlip(true);
   }

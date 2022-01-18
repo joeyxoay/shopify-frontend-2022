@@ -1,4 +1,3 @@
-import logo from '../logo.svg';
 import '../style/Home.css';
 import { SearchBar } from '../components/SearchBar';
 import { paths } from '../utils/constants';
@@ -16,7 +15,7 @@ export function Home() {
             <TrailingCursor/>
             <BackgroundParticles/>
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
+                <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/1237px-NASA_logo.svg.png" className="App-logo" alt="logo" />
                 <Typist startDelay={5}>Welcome! Search below for some awesome NASA pictures :)</Typist>
                 <div className="SearchDiv">
                     <SearchBar
