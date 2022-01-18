@@ -1,5 +1,3 @@
-// import logo from './logo.svg';
-import './App.css';
 import { NasaApp } from './view/NasaApp';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { paths } from './utils/constants';

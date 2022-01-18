@@ -24,7 +24,7 @@ export function NasaApp() {
 	const [apiFailed, setApiFailed] = useState(false);
 
 	var currentURL = window.location.href;
-	var likedPics = localStorage.getItem("likedPics").split(",");
+	var likedPics = localStorage.getItem("likedPics") === null ? [] : localStorage.getItem("likedPics").split(",");
 
 	const renderCards = () => {
 		return (
