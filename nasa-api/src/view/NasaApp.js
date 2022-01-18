@@ -59,7 +59,6 @@ export function NasaApp() {
     }
 
     const failCallback = (statusCode) => {
-        console.log(statusCode);
 		setTimeout(() => {
 			setApiFailed(true);
 		 }, 2000)
