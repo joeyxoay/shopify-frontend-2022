@@ -13,9 +13,9 @@ export function DateSelector(props) {
             <Grid container direction="row">
                 <IconButton aria-label="like" onClick={() => enableMechanism()}>
                     {props.enable ? 
-                    <CheckCircle sx={{ color: "white"}}/>
-                    :
-                    <RadioButtonUnchecked sx={{ color: "white"}}/>
+                        <CheckCircle sx={{ color: "white"}}/>
+                        :
+                        <RadioButtonUnchecked sx={{ color: "white"}}/>
                     }
                 </IconButton>
                 <p style={{color: "white"}}>{props.title}</p>
