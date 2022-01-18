@@ -77,7 +77,7 @@ export function NasaCard(props) {
         <Grid style={{width: "80%"}}>
           <h1> {props.title}</h1>
         </Grid>
-        
+
         <Grid>
           <IconButton onClick={() => likeMechanism()}>
             <ReactCardFlip isFlipped={like}>
@@ -115,7 +115,6 @@ export function NasaCard(props) {
           </div>
         </ReactCardFlip>
       </div>
-        
     </div>
   );
 }
