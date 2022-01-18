@@ -17,7 +17,7 @@ export function NasaApp() {
 	const [searchTitle, setSearchTitle] = useState("");
 	const [enableStart, setEnableStart] = useState(false);
 	const [enableEnd, setEnableEnd] = useState(false);
-	const [startDate, setStartDate] = useState(new Date("2000-01-01 00:00:00"));
+	const [startDate, setStartDate] = useState(new Date(946710000000));
 	const [endDate, setEndDate] = useState(new Date());
 	const [queryParam, setQueryParam] = useState("");
 	const [queryPic, setQueryPic] = useState("");
@@ -33,7 +33,7 @@ export function NasaApp() {
 					if(!enableStart || Date.parse(image.data[0].date_created) >= Date.parse(startDate.toString())){
 						if(!enableEnd || Date.parse(image.data[0].date_created) <= Date.parse(endDate.toString())){
 							return(
-								<Grid item xs={12} md={6} lg={4} className = "NasaCardGrid">
+								<Grid item xs={12} md={6} lg={4} className = "NasaCardGrid" key={"Grid/" + image.data[0].nasa_id}>
 									<Fade bottom>
 										<NasaCard
 											key = {image.data[0].nasa_id}
@@ -140,15 +140,15 @@ export function NasaApp() {
 						justifyContent="space-between"
 						alignItems="center"
 					>
-						<Grid item xs={12} md={4} lg={4}>
-						<IconButton aria-label="like" onClick={() => window.location.href = paths.HOME}>
-							<ArrowBackIcon sx={{ color: "white"}}/>
-						</IconButton>
+						<Grid item xs={12} md={2} lg={2}>
+							<IconButton aria-label="like" onClick={() => window.location.href = paths.HOME}>
+								<ArrowBackIcon sx={{ color: "white"}}/>
+							</IconButton>
 						</Grid>
-						<Grid item xs={12} md={4} lg={4}>
+						<Grid item xs={12} md={8} lg={8}>
 							<h1>{searchTitle}</h1>
 						</Grid>
-						<Grid container xs={12} md={4} lg={4}>
+						<Grid item xs={12} md={2} lg={2}>
 							<DateSelector
 								date = {startDate}
 								setDate = {setStartDate}

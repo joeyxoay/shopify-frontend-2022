@@ -9,7 +9,7 @@ export function DateSelector(props) {
         props.enable ? props.setEnable(false) : props.setEnable(true);
     }
     return (
-        <Grid container direction="row" xs={12} md={6} lg={6}>
+        <Grid container direction="row">
             <Grid container direction="row">
                 <IconButton aria-label="like" onClick={() => enableMechanism()}>
                     {props.enable ? 

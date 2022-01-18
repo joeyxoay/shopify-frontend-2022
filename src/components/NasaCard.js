@@ -77,8 +77,8 @@ export function NasaCard(props) {
         <Grid style={{width: "80%"}}>
           <h1> {props.title}</h1>
         </Grid>
+        
         <Grid>
-          
           <IconButton onClick={() => likeMechanism()}>
             <ReactCardFlip isFlipped={like}>
                 <FavoriteBorderIcon sx={{ color: likeButtonColor}}/>
@@ -93,7 +93,6 @@ export function NasaCard(props) {
               <ShareIcon sx={{ color: buttonColor}}/>
             }
           </IconButton>
-
         </Grid>
       </Grid>
 
